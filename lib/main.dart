@@ -1,3 +1,4 @@
+import 'package:cloud_project/secondPage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -52,6 +53,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  String _name = 'Jorge';
+
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -104,6 +107,27 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            Text(
+              'Hi, my name is $_name',
+              style: TextStyle(
+                color: Colors.purple,
+                fontSize: 30.0,
+              ),
+            ),
+            Image.network("https://upload.wikimedia.org/wikipedia/commons/3/36/Large_bonfire.jpg"),
+            IconButton(
+              icon: Icon(
+                Icons.emoji_symbols_outlined,
+              ),
+              onPressed: () async {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SettingsScreen(),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),
@@ -113,5 +137,10 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  void _changeName() async {
+    _name = (_name == 'Jorge') ? 'Iftekhar' : 'Jorge';
+    setState(() {});
   }
 }
