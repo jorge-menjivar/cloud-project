@@ -1,5 +1,9 @@
 import 'package:cloud_project/secondPage.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+// Import the firebase_core plugin
+import 'package:firebase_core/firebase_core.dart';
 
 void main() {
   runApp(MyApp());
@@ -53,7 +57,25 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  String _name = 'Jorge';
+  String _name = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _downloadData();
+  }
+
+  Future<void> _downloadData() async {
+    await Firebase.initializeApp();
+    await FirebaseFirestore.instance.collection('test_collection').doc('user1').get().then((doc) {
+      if (!doc.exists) {
+        print('DOC DOES NOT EXIST');
+      } else {
+        _name = doc.data()['name'];
+        setState(() {});
+      }
+    });
+  }
 
   void _incrementCounter() {
     setState(() {
