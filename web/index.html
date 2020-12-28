@@ -32,11 +32,27 @@
 <body>
   
   <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="/__/firebase/8.2.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
   
   <!-- TODO: Add SDKs for Firebase products that you want to use
        https://firebase.google.com/docs/web/setup#available-libraries -->
   
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyApbEs7dVKeK9uWtp8p3IRN2Pl4jPD1ThA",
+      authDomain: "cloud-project-bf9cd.firebaseapp.com",
+      projectId: "cloud-project-bf9cd",
+      storageBucket: "cloud-project-bf9cd.appspot.com",
+      messagingSenderId: "22790395561",
+      appId: "1:22790395561:web:aa33d5d148bb0c00913bb8"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
   <!-- Initialize Firebase -->
   <script src="/__/firebase/init.js"></script>
   
@@ -51,7 +67,5 @@
     }
   </script>
   <script src="main.dart.js" type="application/javascript"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-sqflite.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
 </body>
 </html>
