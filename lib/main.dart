@@ -1,9 +1,12 @@
 import 'package:cloud_project/secondPage.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
+// -----------------Firebase-----------------
 // Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() {
   runApp(MyApp());
@@ -79,7 +82,11 @@ class _MyHomePageState extends State<MyHomePage> {
     //   }
     // });
 
-    FirebaseFirestore.instance.collection('test_collection').doc('user1').snapshots().listen((docSnapshot) async {
+    FirebaseFirestore.instance
+        .collection('test_collection')
+        .doc('user1')
+        .snapshots()
+        .listen((docSnapshot) async {
       if (docSnapshot.exists) {
         _name = docSnapshot.data()['name'];
         _dataReady = true;
@@ -152,7 +159,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontSize: 30.0,
                 ),
               ),
-              Image.network("https://upload.wikimedia.org/wikipedia/commons/3/36/Large_bonfire.jpg"),
+              Image.network(
+                  "https://upload.wikimedia.org/wikipedia/commons/3/36/Large_bonfire.jpg"),
               IconButton(
                 icon: Icon(
                   Icons.emoji_symbols_outlined,
