@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cupertino_date_textbox/cupertino_date_textbox.dart';
-import './signup2.dart';
+import './signupPage2.dart';
 
 class SignupPage1 extends StatefulWidget {
   @override
