@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
   
   flutter_signin_button: ^1.1.0
+  cupertino_date_textbox: ^1.0.0+3
   # Firebase tools
   firebase_core: ^0.5.3
   cloud_firestore: ^0.14.4
