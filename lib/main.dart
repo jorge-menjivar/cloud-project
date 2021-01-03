@@ -1,3 +1,4 @@
+import 'package:cloud_project/homeScreen.dart';
 import 'package:cloud_project/secondPage.dart';
 import 'package:flutter/material.dart';
 
@@ -5,7 +6,6 @@ import 'package:flutter/material.dart';
 // Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 void main() {
@@ -34,7 +34,8 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: HomeScreen(),
+      //(title: 'Flutter Demo Home Page'),
     );
   }
 }
