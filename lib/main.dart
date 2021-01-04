@@ -1,15 +1,12 @@
-import 'package:cloud_project/homeScreen.dart';
-import 'package:cloud_project/secondPage.dart';
+import 'package:cloud_project/home_page.dart';
+import 'package:cloud_project/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-// login file
-
 // -----------------Firebase-----------------
-// Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -80,19 +77,19 @@ class AuthenticationState extends State<Authentication> {
       }
     });
 
-    var message = {
-      'text': msg,
-      'img': false,
-      'from': user.uid,
-      'time_epoch': DateTime.now().millisecondsSinceEpoch,
-    };
+    // var message = {
+    //   'text': msg,
+    //   'img': false,
+    //   'from': user.uid,
+    //   'time_epoch': DateTime.now().millisecondsSinceEpoch,
+    // };
 
-    FirebaseFirestore.instance
-        .collection('conversations')
-        .doc('convo1')
-        .collection('messages')
-        .doc()
-        .set(message);
+    // FirebaseFirestore.instance
+    //     .collection('conversations')
+    //     .doc('convo1')
+    //     .collection('messages')
+    //     .doc()
+    //     .set(message);
   }
 
   @override
@@ -102,41 +99,80 @@ class AuthenticationState extends State<Authentication> {
         child: CircularProgressIndicator(),
       );
     } else {
-      if (_user == null) {
-        // return MaterialApp(
-        //   home: Scaffold(
-        //     body: LoginScreen(),
-        //   ),
-        // );
-      }
-    }
-    return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                _text,
-                style: TextStyle(
-                  fontSize: 40.0,
-                ),
-              ),
-              Text(
-                _from,
-                style: TextStyle(
-                  fontSize: 40.0,
-                ),
-              ),
-              Text(
-                _timeEpoch.toString(),
-                style: TextStyle(
-                  fontSize: 40.0,
-                ),
-              ),
-            ],
+      return MaterialApp(
+        theme: lightTheme(),
+        darkTheme: darkTheme(),
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text('Cloud Project'),
           ),
+          body: (_user == null) ? LoginPage() : HomePage(),
         ),
+      );
+    }
+  }
+
+  ThemeData lightTheme() {
+    // Feel free to change
+    // This is the light theme for the app.
+    // All colors and other UI cuztomizations should be done here.
+    return ThemeData(
+      primaryColor: Colors.green,
+      primarySwatch: Colors.blueGrey,
+      canvasColor: Colors.white,
+      accentColor: Colors.blueAccent,
+      dividerColor: Colors.black12,
+      primaryColorBrightness: Brightness.light,
+      brightness: Brightness.light,
+      accentColorBrightness: Brightness.dark,
+      appBarTheme: AppBarTheme(
+        centerTitle: true,
+        elevation: 1,
+        shadowColor: Colors.black,
+      ),
+      cupertinoOverrideTheme: CupertinoThemeData(
+        textTheme: CupertinoTextThemeData(
+          primaryColor: Colors.black87,
+        ),
+        primaryColor: Colors.red,
+        primaryContrastingColor: Colors.black,
+        barBackgroundColor: Colors.white,
+      ),
+    );
+  }
+
+  ThemeData darkTheme() {
+    // Feel free to change
+    // This is the dark theme for the app.
+    // All colors and other UI cuztomizations should be done here.
+    return ThemeData(
+      primaryColor: Colors.green,
+      primaryColorLight: Colors.blueGrey,
+      primaryColorDark: Colors.white38,
+      primarySwatch: Colors.blueGrey,
+      canvasColor: Colors.black,
+      accentColor: Colors.blueAccent,
+      dividerColor: Colors.white30,
+      primaryColorBrightness: Brightness.dark,
+      brightness: Brightness.dark,
+      accentColorBrightness: Brightness.light,
+      iconTheme: IconThemeData(
+        color: Colors.white,
+        opacity: 1,
+        size: 25,
+      ),
+      appBarTheme: AppBarTheme(
+        centerTitle: true,
+        elevation: 2,
+        shadowColor: Colors.black,
+      ),
+      cupertinoOverrideTheme: CupertinoThemeData(
+        textTheme: CupertinoTextThemeData(
+          primaryColor: Colors.white,
+        ),
+        primaryColor: Colors.red,
+        primaryContrastingColor: Colors.white,
+        barBackgroundColor: Colors.black,
       ),
     );
   }
