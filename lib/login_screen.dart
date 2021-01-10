@@ -17,8 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormFieldState> _emailFieldKey = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> _passwordFieldKey =
-      GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> _passwordFieldKey = GlobalKey<FormFieldState>();
   bool isRememberMe = false;
 
   AuthenticationService _authenticationService = AuthenticationService();
@@ -29,19 +28,14 @@ class _LoginScreenState extends State<LoginScreen> {
       children: <Widget>[
         Text(
           'Email',
-          style: TextStyle(
-              color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
         Container(
           alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black26, blurRadius: 6, offset: Offset(0, 2)),
-              ]),
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), boxShadow: [
+            BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 2)),
+          ]),
           height: 60,
           child: TextField(
             key: _emailFieldKey,
@@ -67,19 +61,14 @@ class _LoginScreenState extends State<LoginScreen> {
       children: <Widget>[
         Text(
           'Password',
-          style: TextStyle(
-              color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
         Container(
           alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black26, blurRadius: 6, offset: Offset(0, 2)),
-              ]),
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), boxShadow: [
+            BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 2)),
+          ]),
           height: 60,
           child: TextField(
             key: _passwordFieldKey,
@@ -150,9 +139,10 @@ class _LoginScreenState extends State<LoginScreen> {
       child: RaisedButton(
         onPressed: () {
           _authenticationService.signIn(
-              email: _emailController.text.toString(),
-              password: _passwordController.text.toString(),
-              auth: _auth);
+            email: _emailController.text.toString(),
+            password: _passwordController.text.toString(),
+            auth: _auth,
+          );
         },
         elevation: 5,
         padding: EdgeInsets.all(15),
@@ -160,10 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
         color: Colors.white,
         child: Text(
           'Login',
-          style: TextStyle(
-              color: Color(0xff4b2665),
-              fontSize: 18,
-              fontWeight: FontWeight.bold),
+          style: TextStyle(color: Color(0xff4b2665), fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -176,13 +163,11 @@ class _LoginScreenState extends State<LoginScreen> {
         text: TextSpan(children: [
           TextSpan(
             text: 'Don\'t have an Account?',
-            style: TextStyle(
-                color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),
+            style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),
           ),
           TextSpan(
             text: ' Sign Up',
-            style: TextStyle(
-                color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+            style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ]),
       ),
@@ -200,15 +185,12 @@ class _LoginScreenState extends State<LoginScreen> {
               height: double.infinity,
               width: double.infinity,
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0x664b2665),
-                      Color(0x994b2665),
-                      Color(0xcc4b2665),
-                      Color(0xff4b2665),
-                    ]),
+                gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
+                  Color(0x664b2665),
+                  Color(0x994b2665),
+                  Color(0xcc4b2665),
+                  Color(0xff4b2665),
+                ]),
               ),
               child: SingleChildScrollView(
                 physics: AlwaysScrollableScrollPhysics(),
@@ -218,10 +200,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: <Widget>[
                     Text(
                       'Sign In',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold),
+                      style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 50),
                     buildEmail(),
