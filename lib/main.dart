@@ -2,6 +2,7 @@ import 'package:cloud_project/homeScreen.dart';
 import 'package:cloud_project/secondPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'conversations.dart';
 
 // login file
 
@@ -37,7 +38,7 @@ class AuthenticationState extends State<Authentication> {
   void initState() {
     super.initState();
     loggedIn();
-    _downloadData();
+    // _downloadData();
   }
 
   void loggedIn() async {
@@ -48,52 +49,52 @@ class AuthenticationState extends State<Authentication> {
     });
   }
 
-  Future<void> _downloadData() async {
-    await Firebase.initializeApp();
-    // await FirebaseFirestore.instance
-    //     .collection('conversations')
-    //     .doc('convo1')
-    //     .collection('messages')
-    //     .doc('msg_1')
-    //     .get()
-    //     .then((docSnapshot) {
-    //   if (!docSnapshot.exists) {
-    //     print('DOC DOES NOT EXIST');
-    //   } else {
-    //     _from = docSnapshot.data()['from'];
-    //     _text = docSnapshot.data()['text'];
-    //     _timeEpoch = docSnapshot.data()['time_epoch'];
-    //     setState(() {});
-    //   }
-    // });
+  // Future<void> _downloadData() async {
+  //   await Firebase.initializeApp();
+  //   // await FirebaseFirestore.instance
+  //   //     .collection('conversations')
+  //   //     .doc('convo1')
+  //   //     .collection('messages')
+  //   //     .doc('msg_1')
+  //   //     .get()
+  //   //     .then((docSnapshot) {
+  //   //   if (!docSnapshot.exists) {
+  //   //     print('DOC DOES NOT EXIST');
+  //   //   } else {
+  //   //     _from = docSnapshot.data()['from'];
+  //   //     _text = docSnapshot.data()['text'];
+  //   //     _timeEpoch = docSnapshot.data()['time_epoch'];
+  //   //     setState(() {});
+  //   //   }
+  //   // });
 
-    FirebaseFirestore.instance
-        .collection('conversations')
-        .doc('convo1')
-        .collection('messages')
-        .doc('nLG73CODFDimHv62aBo0')
-        .snapshots()
-        .listen((docSnapshot) async {
-      if (docSnapshot.exists) {
-        _text = docSnapshot.data()['text'];
-        setState(() {});
-      }
-    });
+  //   FirebaseFirestore.instance
+  //       .collection('conversations')
+  //       .doc('convo1')
+  //       .collection('messages')
+  //       .doc('nLG73CODFDimHv62aBo0')
+  //       .snapshots()
+  //       .listen((docSnapshot) async {
+  //     if (docSnapshot.exists) {
+  //       _text = docSnapshot.data()['text'];
+  //       setState(() {});
+  //     }
+  //   });
 
-    var message = {
-      'text': msg,
-      'img': false,
-      'from': user.uid,
-      'time_epoch': DateTime.now().millisecondsSinceEpoch,
-    };
+  //   var message = {
+  //     'text': msg,
+  //     'img': false,
+  //     'from': user.uid,
+  //     'time_epoch': DateTime.now().millisecondsSinceEpoch,
+  //   };
 
-    FirebaseFirestore.instance
-        .collection('conversations')
-        .doc('convo1')
-        .collection('messages')
-        .doc()
-        .set(message);
-  }
+  //   FirebaseFirestore.instance
+  //       .collection('conversations')
+  //       .doc('convo1')
+  //       .collection('messages')
+  //       .doc()
+  //       .set(message);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -112,31 +113,7 @@ class AuthenticationState extends State<Authentication> {
     }
     return MaterialApp(
       home: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                _text,
-                style: TextStyle(
-                  fontSize: 40.0,
-                ),
-              ),
-              Text(
-                _from,
-                style: TextStyle(
-                  fontSize: 40.0,
-                ),
-              ),
-              Text(
-                _timeEpoch.toString(),
-                style: TextStyle(
-                  fontSize: 40.0,
-                ),
-              ),
-            ],
-          ),
-        ),
+        body: ConvoScreen(),
       ),
     );
   }
