@@ -2,12 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
+// ----------------Firebase imports-------------------
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'authentication_service.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final GlobalKey<FormFieldState> _emailFieldKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> _passwordFieldKey = GlobalKey<FormFieldState>();
+
+  AuthenticationService _authenticationService = AuthenticationService();
+
   bool isRememberMe = false;
 
   Widget email() {
@@ -30,7 +43,9 @@ class _LoginPageState extends State<LoginPage> {
             borderRadius: BorderRadius.circular(10),
           ),
           child: TextField(
-            //keyboardType: TextInputType.emailAddress,
+            controller: _emailController,
+            key: _emailFieldKey,
+            keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.black87,
             ),
@@ -72,6 +87,8 @@ class _LoginPageState extends State<LoginPage> {
             borderRadius: BorderRadius.circular(10),
           ),
           child: TextField(
+            controller: _passwordController,
+            key: _passwordFieldKey,
             obscureText: true,
             style: TextStyle(
               color: Colors.black87,
@@ -153,25 +170,31 @@ class _LoginPageState extends State<LoginPage> {
       padding: EdgeInsets.symmetric(vertical: 17),
       width: double.infinity,
       child: RaisedButton(
-          elevation: 5,
-          onPressed: () => {
-            // if log in successfully, 
-            // go to home page
-            print('sign in pressed'),
-          },
-          padding: EdgeInsets.all(8),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
+        elevation: 5,
+        onPressed: () {
+          // if log in successfully,
+          // go to home page
+          print('sign in pressed');
+          _authenticationService.signIn(
+            email: _emailController.text.toString(),
+            password: _passwordController.text.toString(),
+            auth: _auth,
+          );
+        },
+        padding: EdgeInsets.all(8),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        color: Colors.white,
+        child: Text(
+          'LOGIN',
+          style: TextStyle(
+            color: Color(0xff5ac18e),
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
           ),
-          color: Colors.white,
-          child: Text(
-            'LOGIN',
-            style: TextStyle(
-              color: Color(0xff5ac18e),
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          )),
+        ),
+      ),
     );
   }
 

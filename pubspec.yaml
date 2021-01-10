@@ -26,6 +26,7 @@ dependencies:
   
   cupertino_date_textbox: ^1.0.0+3
   flutter_signin_button: ^1.1.0
+  provider: ^4.3.2+3
 
 
   # Firebase tools
