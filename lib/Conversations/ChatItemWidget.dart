@@ -1,15 +1,21 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 //import "package:intl/intl.dart";
 
 class ChatItemWidget extends StatelessWidget {
   var index;
+  final String text;
+  final int time;
+  final String from;
 
-  ChatItemWidget(this.index);
+  final String uid = 'user1'; //FirebaseAuth.instance.currentUser.toString();
+
+  ChatItemWidget(this.index, {@required this.text, @required this.time, @required this.from});
   @override
   Widget build(BuildContext context) {
     //implement build
-    if (index % 2 == 0) {
+    if (from == uid) {
       //This is the sent message. We'll later use data from firebase instead of index to determine the message is sent or received.
       return Container(
           child: Column(children: <Widget>[
@@ -17,7 +23,7 @@ class ChatItemWidget extends StatelessWidget {
           children: <Widget>[
             Container(
               child: Text(
-                'This is a sent message',
+                text,
                 style: TextStyle(color: Colors.black),
               ),
               padding: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
@@ -26,8 +32,7 @@ class ChatItemWidget extends StatelessWidget {
               margin: EdgeInsets.only(right: 10.0),
             )
           ],
-          mainAxisAlignment:
-              MainAxisAlignment.end, // aligns the chatitem to right end
+          mainAxisAlignment: MainAxisAlignment.end, // aligns the chatitem to right end
         ),
         Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
           Container(
@@ -53,14 +58,12 @@ class ChatItemWidget extends StatelessWidget {
               children: <Widget>[
                 Container(
                   child: Text(
-                    'This is a received message',
+                    text,
                     style: TextStyle(color: Colors.white),
                   ),
                   padding: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
                   width: 200.0,
-                  decoration: BoxDecoration(
-                      color: Colors.blueGrey,
-                      borderRadius: BorderRadius.circular(8.0)),
+                  decoration: BoxDecoration(color: Colors.blueGrey, borderRadius: BorderRadius.circular(8.0)),
                   margin: EdgeInsets.only(left: 10.0),
                 )
               ],
@@ -86,7 +89,6 @@ class ChatItemWidget extends StatelessWidget {
   }
 
   BoxDecoration SelfMessageColor() {
-    return BoxDecoration(
-        color: Colors.indigo[200], borderRadius: BorderRadius.circular(8.0));
+    return BoxDecoration(color: Colors.indigo[200], borderRadius: BorderRadius.circular(8.0));
   }
 }

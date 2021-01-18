@@ -10,7 +10,7 @@ class ConversationPage extends StatefulWidget {
 }
 
 class _ConversationPageState extends State<ConversationPage> {
-  List<QuerySnapshot> _list;
+  List<QueryDocumentSnapshot> _list;
 
   @override
   void initState() {
@@ -20,13 +20,17 @@ class _ConversationPageState extends State<ConversationPage> {
   }
 
   Future<void> downloadData() async {
-    var querySnapshot = await FirebaseFirestore.instance
+    FirebaseFirestore.instance
         .collection('conversations')
         .doc('convo1')
         .collection('messages')
-        .get();
+        .orderBy('time_epoch', descending: true)
+        .snapshots()
+        .listen((querySnapshots) {
+      _list = querySnapshots.docs;
 
-    _list = querySnapshot.docs.cast<QuerySnapshot>().toList();
+      setState(() {});
+    });
   }
 
   @override
@@ -38,7 +42,9 @@ class _ConversationPageState extends State<ConversationPage> {
           children: <Widget>[
             Column(
               children: <Widget>[
-                ChatListWidget(querySnapshot: _list), //Chat list
+                ChatListWidget(
+                  querySnapshots: _list,
+                ), //Chat list
                 InputWidget() // The input widget
               ],
             ),
