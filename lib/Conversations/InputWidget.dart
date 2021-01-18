@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class InputWidget extends StatelessWidget {
@@ -41,7 +42,21 @@ class InputWidget extends StatelessWidget {
               margin: new EdgeInsets.symmetric(horizontal: 8.0),
               child: new IconButton(
                 icon: new Icon(Icons.send),
-                onPressed: () => {},
+                onPressed: () {
+                  var message = {
+                    'text': textEditingController.text,
+                    'img': false,
+                    'from': 'user1',
+                    'time_epoch': DateTime.now().millisecondsSinceEpoch,
+                  };
+
+                  FirebaseFirestore.instance
+                      .collection('conversations')
+                      .doc('convo1')
+                      .collection('messages')
+                      .doc()
+                      .set(message);
+                },
                 color: Colors.white70,
               ),
             ),

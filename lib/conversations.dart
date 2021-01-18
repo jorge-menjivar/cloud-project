@@ -1,5 +1,4 @@
 import 'package:cloud_project/homeScreen.dart';
-import 'package:cloud_project/secondPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

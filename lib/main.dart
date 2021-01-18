@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'conversations.dart';
+import 'Conversations/conversationPage.dart';
 
 // -----------------Firebase-----------------
 import 'package:firebase_core/firebase_core.dart';
@@ -107,7 +108,7 @@ class AuthenticationState extends State<Authentication> {
           appBar: AppBar(
             title: Text('Cloud Project'),
           ),
-          body: (_user == null) ? LoginPage() : HomePage(),
+          body: (_user == null) ? LoginPage() : ConversationPage(),
         ),
       );
     }
